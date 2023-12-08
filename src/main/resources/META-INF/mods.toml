@@ -1,0 +1,24 @@
+modLoader="javafml"
+loaderVersion="[43,)"
+license="All rights reserved"
+[[mods]]
+modId="ic2rei"
+version="${file.jarVersion}"
+displayName="IC2 - REI Plugin"
+credits="IC2Classic & REI dev teams."
+authors="CrossVas"
+description='''
+Compat Layer between IC2Classic and REI mods.
+'''
+[[dependencies.ic2rei]]
+    modId="roughlyenoughitems"
+    mandatory=true
+    versionRange="[9.1.663,)"
+    ordering="AFTER"
+    side="BOTH"
+[[dependencies.ic2rei]]
+    modId="ic2"
+    mandatory=true
+    versionRange="[1.19.2-2.0.8,)"
+    ordering="AFTER"
+    side="BOTH"

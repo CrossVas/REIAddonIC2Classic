@@ -1,0 +1,31 @@
+{
+  "rei.cat.canner.repair": "Canner - Repair",
+  "rei.cat.canner.refuel": "Canner - Refuel",
+  "rei.cat.canner.refill": "Canner - Refill",
+
+  "rei.cat.earth_extractor.points": "%s Points",
+  "rei.cat.earth_extractor.total": "%s Items",
+
+  "rei.cat.massfab.amp": "Amplifier:",
+  "rei.cat.massfab.tier.hv": "Tier: HV",
+  "rei.cat.massfab.packets": "Packets:",
+  "rei.cat.massfab.packets.infinite": "Infinite",
+  "rei.cat.massfab.energy": "Energy:",
+
+  "rei.cat.plasmafier.tier.ev": "Tier: EV",
+  "rei.cat.plasmafier.ticks": "Ticks: %s",
+
+  "rei.cat.brewing.rum": "Brewing - Rum",
+  "rei.cat.brewing.rum.time": "Brew Time: %s",
+  "rei.cat.brewing.beer": "Brewing - Beer",
+  "rei.cat.brewing.beer.clock": "Brew Time Stage (Accumulated Brew time)",
+  "rei.cat.brewing.beer.ratio": " <= Ratios",
+  "rei.cat.brewing.potion": "Brewing - Potion",
+
+  "rei.info.reader.error": "EU-Reader is required to display more info!",
+  "rei.info.enricher.points": "[Points]",
+
+  "rei.group.crop_seeds": "Crop Seeds",
+  "rei.group.mugs": "Mugs",
+  "rei.group.glasses": "Glasses"
+}
