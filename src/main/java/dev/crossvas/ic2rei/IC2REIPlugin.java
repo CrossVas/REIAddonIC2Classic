@@ -61,11 +61,6 @@ import java.util.List;
 @REIPluginClient
 public class IC2REIPlugin implements REIClientPlugin {
 
-    /***
-     * <p>
-     * {@link ic2.core.platform.registries.IC2Tiles}
-     */
-
     @Override
     public void registerCategories(CategoryRegistry registry) {
         registerExistingStations(registry);
