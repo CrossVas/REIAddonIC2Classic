@@ -1,0 +1,30 @@
+{
+  "rei.cat.canner.repair": "Наполнитель - Починка",
+  "rei.cat.canner.refuel": "Наполнитель - Заправка",
+  "rei.cat.canner.refill": "Наполнитель - Пополнение",
+
+  "rei.cat.earth_extractor.points": "%s очки",
+  "rei.cat.earth_extractor.total": "%s предмет(а)",
+
+  "rei.cat.massfab.amp": "Усилитель:",
+  "rei.cat.massfab.tier.hv": "Уровень: HV",
+  "rei.cat.massfab.packets": "Пакеты:",
+  "rei.cat.massfab.packets.infinite": "Бессконечно",
+  "rei.cat.massfab.energy": "Энергия:",
+
+  "rei.cat.plasmafier.tier.ev": "Уровень: EV",
+  "rei.cat.plasmafier.ticks": "Тики: %s",
+
+  "rei.cat.brewing.rum": "Пивоварение - Ром",
+  "rei.cat.brewing.rum.time": "Время приготовления: %s",
+  "rei.cat.brewing.beer": "Пивоварение - Пиво",
+  "rei.cat.brewing.beer.clock": "Время приготовления (накопленное время приготовления)",
+  "rei.cat.brewing.potion": "Пивоварение - Зелье",
+
+  "rei.info.reader.error": "Для отображения дополнительной информации требуется EU-Reader!",
+  "rei.info.enricher.points": "[Очки]",
+
+  "rei.group.crop_seeds": "Семена культур",
+  "rei.group.mugs": "Кружки",
+  "rei.group.glasses": "Бокалы"
+}

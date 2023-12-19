@@ -1,0 +1,30 @@
+{
+  "rei.cat.canner.repair": "통조림기 - 수리",
+  "rei.cat.canner.refuel": "통조림기 - 재급유",
+  "rei.cat.canner.refill": "통조림기 - 리필",
+
+  "rei.cat.earth_extractor.points": "%s 포인트",
+  "rei.cat.earth_extractor.total": "%s 아이템",
+
+  "rei.cat.massfab.amp": "증폭:",
+  "rei.cat.massfab.tier.hv": "티어: HV",
+  "rei.cat.massfab.packets": "패킷:",
+  "rei.cat.massfab.packets.infinite": "무한",
+  "rei.cat.massfab.energy": "에너지:",
+
+  "rei.cat.plasmafier.tier.ev": "티어: EV",
+  "rei.cat.plasmafier.ticks": "틱: %s",
+
+  "rei.cat.brewing.rum": "양조 - 럼",
+  "rei.cat.brewing.rum.time": "양조 시간: %s",
+  "rei.cat.brewing.beer": "양조 - 맥주",
+  "rei.cat.brewing.beer.clock": "양조 단계 시간 (누적 양조 시간)",
+  "rei.cat.brewing.potion": "양조 - 물약",
+
+  "rei.info.reader.error": "더 많은 정보를 표시하려면 EU-측정기가 필요함!",
+  "rei.info.enricher.points": "[포인트]",
+
+  "rei.group.crop_seeds": "작물 씨앗",
+  "rei.group.mugs": "머그 컵",
+  "rei.group.glasses": "유리 잔"
+}
