@@ -1,0 +1,30 @@
+{
+  "rei.cat.canner.repair": "Наповнювач - Лагодження",
+  "rei.cat.canner.refuel": "Наповнювач - Заправка",
+  "rei.cat.canner.refill": "Наповнювач - Поповнення",
+
+  "rei.cat.earth_extractor.points": "%s очки",
+  "rei.cat.earth_extractor.total": "%s предмет(и)",
+
+  "rei.cat.massfab.amp": "Підсилювач:",
+  "rei.cat.massfab.tier.hv": "Рівень: HV",
+  "rei.cat.massfab.packets": "Пакети:",
+  "rei.cat.massfab.packets.infinite": "Нескінченна",
+  "rei.cat.massfab.energy": "Енергія:",
+
+  "rei.cat.plasmafier.tier.ev": "Рівень: EV",
+  "rei.cat.plasmafier.ticks": "Тіки: %s",
+
+  "rei.cat.brewing.rum": "Броварництво - Ром",
+  "rei.cat.brewing.rum.time": "Приготування буде відбуватись ще: %s",
+  "rei.cat.brewing.beer": "Броварництво - Пиво",
+  "rei.cat.brewing.beer.clock": "Час броварення (накопичений час приготування)",
+  "rei.cat.brewing.potion": "Броварництво - Зілля",
+
+  "rei.info.reader.error": "Щоб дізнатись більше інформації, потрібен EU-Метр!",
+  "rei.info.enricher.points": "[Очки]",
+
+  "rei.group.crop_seeds": "Насіння культур",
+  "rei.group.mugs": "Кухолі",
+  "rei.group.glasses": "Склянки"
+}
