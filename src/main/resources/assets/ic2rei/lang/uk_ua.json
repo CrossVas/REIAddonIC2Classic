@@ -16,7 +16,7 @@
   "rei.cat.plasmafier.ticks": "Тіки: %s",
 
   "rei.cat.brewing.rum": "Броварництво - Ром",
-  "rei.cat.brewing.rum.time": "Приготування буде відбуватись ще: %s",
+  "rei.cat.brewing.rum.time": "Час заварювання: %s",
   "rei.cat.brewing.beer": "Броварництво - Пиво",
   "rei.cat.brewing.beer.clock": "Час броварення (накопичений час приготування)",
   "rei.cat.brewing.potion": "Броварництво - Зілля",
