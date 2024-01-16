@@ -97,68 +97,70 @@ public class MachineClickAreaHandler implements ClickArea<ComponentContainerScre
         ContainerComponent<?> comp = (ContainerComponent<?>)container.getCastedContainer(ContainerComponent.class);
         if (comp != null) {
             // basic machines
-            if (MAPPED.containsKey(comp.getHolder().getClass())) {
-                ProgressComponent progress = container.getComponentFromClass(ProgressComponent.class);
-                if (progress != null) {
-                    Box2i box = progress.getBox();
-                    Rectangle progressBox = new Rectangle(container.getGuiLeft() + box.getX(), container.getGuiTop() + box.getY(), box.getWidth(), box.getHeight());
-                    if (progressBox.contains(mousePoint)) {
-                        return ClickArea.Result.success().categories(MAPPED.get(comp.getHolder().getClass()).stream().toList());
+            if (comp.getHolder() != null) {
+                if (MAPPED.containsKey(comp.getHolder().getClass())) {
+                    ProgressComponent progress = container.getComponentFromClass(ProgressComponent.class);
+                    if (progress != null) {
+                        Box2i box = progress.getBox();
+                        Rectangle progressBox = new Rectangle(container.getGuiLeft() + box.getX(), container.getGuiTop() + box.getY(), box.getWidth(), box.getHeight());
+                        if (progressBox.contains(mousePoint)) {
+                            return ClickArea.Result.success().categories(MAPPED.get(comp.getHolder().getClass()).stream().toList());
+                        }
                     }
-                }
 
-                // generators
-                if (comp.getHolder() instanceof BaseGeneratorTileEntity generator) {
-                    FuelComponent fuel = container.getComponentFromClass(FuelComponent.class);
-                    if (fuel != null) {
-                        Box2i box = fuel.getBox();
-                        Rectangle fuelBox = new Rectangle(container.getGuiLeft() + box.getX(), container.getGuiTop() + box.getY(), box.getWidth(), box.getHeight());
-                        if (fuelBox.contains(mousePoint)) {
-                            if (generator instanceof LiquidFuelGenTileEntity) {
-                                return ClickArea.Result.success().category(CategoryIDs.FLUID_GENERATOR);
-                            } else if (generator instanceof GeoGenTileEntity) {
-                                return ClickArea.Result.success().category(CategoryIDs.GEOTHERMAL_GENERATOR);
-                            } else {
-                                return ClickArea.Result.success().category(CategoryIDs.GENERATOR);
+                    // generators
+                    if (comp.getHolder() instanceof BaseGeneratorTileEntity generator) {
+                        FuelComponent fuel = container.getComponentFromClass(FuelComponent.class);
+                        if (fuel != null) {
+                            Box2i box = fuel.getBox();
+                            Rectangle fuelBox = new Rectangle(container.getGuiLeft() + box.getX(), container.getGuiTop() + box.getY(), box.getWidth(), box.getHeight());
+                            if (fuelBox.contains(mousePoint)) {
+                                if (generator instanceof LiquidFuelGenTileEntity) {
+                                    return ClickArea.Result.success().category(CategoryIDs.FLUID_GENERATOR);
+                                } else if (generator instanceof GeoGenTileEntity) {
+                                    return ClickArea.Result.success().category(CategoryIDs.GEOTHERMAL_GENERATOR);
+                                } else {
+                                    return ClickArea.Result.success().category(CategoryIDs.GENERATOR);
+                                }
                             }
                         }
                     }
-                }
-                // special - no components
-                if (comp.getHolder() instanceof MassFabricatorTileEntity) {
-                    Rectangle progressBox = new Rectangle(container.getGuiLeft() + 79, container.getGuiTop() + 40, 18, 15);
-                    if (progressBox.contains(mousePoint)) {
-                        return ClickArea.Result.success().category(CategoryIDs.MASS_FABRICATOR);
-                    }
-                }
-                // special - pump component
-                if (comp.getHolder() instanceof PlasmafierTileEntity) {
-                    PumpComponent pumpBar = container.getComponentFromClass(PumpComponent.class);
-                    if (pumpBar != null) {
-                        Box2i pumpBox = pumpBar.getBox();
-                        Rectangle progressBox = new Rectangle(container.getGuiLeft() + pumpBox.getX(), container.getGuiTop() + pumpBox.getY(), pumpBox.getWidth(), pumpBox.getHeight());
+                    // special - no components
+                    if (comp.getHolder() instanceof MassFabricatorTileEntity) {
+                        Rectangle progressBox = new Rectangle(container.getGuiLeft() + 79, container.getGuiTop() + 40, 18, 15);
                         if (progressBox.contains(mousePoint)) {
-                            return ClickArea.Result.success().category(CategoryIDs.PLASMAFIER);
+                            return ClickArea.Result.success().category(CategoryIDs.MASS_FABRICATOR);
                         }
                     }
-                }
-                // special - chargeBar component
-                if (comp.getHolder() instanceof ElectrolyzerTileEntity || comp.getHolder() instanceof ChargedElectrolyzerTileEntity) {
-                    ChargebarComponent chargebarComponent = container.getComponentFromClass(ChargebarComponent.class);
-                    if (chargebarComponent != null) {
-                        Box2i chargeBarBox = chargebarComponent.getBox();
-                        Rectangle progressBox = new Rectangle(container.getGuiLeft() + chargeBarBox.getX(), container.getGuiTop() + chargeBarBox.getY(), chargeBarBox.getWidth(), chargeBarBox.getHeight());
-                        if (progressBox.contains(mousePoint)) {
-                            return ClickArea.Result.success().category(CategoryIDs.ELECTROLYZER);
+                    // special - pump component
+                    if (comp.getHolder() instanceof PlasmafierTileEntity) {
+                        PumpComponent pumpBar = container.getComponentFromClass(PumpComponent.class);
+                        if (pumpBar != null) {
+                            Box2i pumpBox = pumpBar.getBox();
+                            Rectangle progressBox = new Rectangle(container.getGuiLeft() + pumpBox.getX(), container.getGuiTop() + pumpBox.getY(), pumpBox.getWidth(), pumpBox.getHeight());
+                            if (progressBox.contains(mousePoint)) {
+                                return ClickArea.Result.success().category(CategoryIDs.PLASMAFIER);
+                            }
                         }
                     }
-                }
-                if (comp.getHolder() instanceof IndustrialWorkbenchTileEntity) {
+                    // special - chargeBar component
+                    if (comp.getHolder() instanceof ElectrolyzerTileEntity || comp.getHolder() instanceof ChargedElectrolyzerTileEntity) {
+                        ChargebarComponent chargebarComponent = container.getComponentFromClass(ChargebarComponent.class);
+                        if (chargebarComponent != null) {
+                            Box2i chargeBarBox = chargebarComponent.getBox();
+                            Rectangle progressBox = new Rectangle(container.getGuiLeft() + chargeBarBox.getX(), container.getGuiTop() + chargeBarBox.getY(), chargeBarBox.getWidth(), chargeBarBox.getHeight());
+                            if (progressBox.contains(mousePoint)) {
+                                return ClickArea.Result.success().category(CategoryIDs.ELECTROLYZER);
+                            }
+                        }
+                    }
+                    if (comp.getHolder() instanceof IndustrialWorkbenchTileEntity) {
 
-                    Rectangle arrowBox = new Rectangle(container.getGuiLeft() + 90, container.getGuiTop() + 35, 22, 15);
-                    if (arrowBox.contains(mousePoint)) {
+                        Rectangle arrowBox = new Rectangle(container.getGuiLeft() + 90, container.getGuiTop() + 35, 22, 15);
+                        if (arrowBox.contains(mousePoint)) {
 
-                        return ClickArea.Result.success().category(BuiltinPlugin.CRAFTING);
+                            return ClickArea.Result.success().category(BuiltinPlugin.CRAFTING);
+                        }
                     }
                 }
             }
