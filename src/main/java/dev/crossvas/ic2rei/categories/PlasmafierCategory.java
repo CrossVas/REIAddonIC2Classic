@@ -50,7 +50,7 @@ public class PlasmafierCategory implements DisplayCategory<PlasmafierDisplay>, I
         // Comps
         Component tierComp = format("rei.cat.plasmafier.tier.ev");
         Component ticksComp = format("rei.cat.plasmafier.ticks", display.getRecipe().getTicks());
-        Component energyPerTick = literal("→" + 2048 + " EU/t");
+        Component energyPerTick = literal("→" + 10240 + " EU/t");
         // Points
         Point ticksPoint = point(minX + 5, maxY - 5 - lineHeight);
         Point tierPoint = point(minX + 5, minY + 5);
