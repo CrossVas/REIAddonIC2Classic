@@ -16,19 +16,26 @@ import dev.crossvas.ic2rei.recipes.brewing.PotionBrewRecipe;
 import dev.crossvas.ic2rei.recipes.brewing.RumBrewRecipe;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
+import ic2.api.recipes.ingridients.inputs.IInput;
+import ic2.api.recipes.ingridients.inputs.IngredientInput;
+import ic2.api.recipes.registries.IMachineRecipeList;
 import ic2.api.recipes.registries.IScrapBoxRegistry;
 import ic2.core.IC2;
 import ic2.core.block.cables.CableBlock;
+import ic2.core.block.machines.recipes.misc.ScrapOutput;
 import ic2.core.inventory.gui.ComponentContainerScreen;
 import ic2.core.inventory.gui.IC2Screen;
 import ic2.core.item.food_and_drink.GlassItem;
 import ic2.core.item.food_and_drink.MugItem;
 import ic2.core.item.misc.CropSeedItem;
 import ic2.core.item.misc.FluidDisplay;
+import ic2.core.platform.recipes.helpers.ItemStackCache;
 import ic2.core.platform.recipes.misc.GlobalRecipes;
 import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.platform.registries.IC2Fluids;
 import ic2.core.platform.registries.IC2Items;
+import ic2.core.utils.collection.CollectionUtils;
+import it.unimi.dsi.fastutil.objects.ObjectList;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
@@ -50,10 +57,10 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
+import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.registries.ForgeRegistries;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -143,7 +150,7 @@ public class IC2REIPlugin implements REIClientPlugin {
         RECIPES.macerator.getAllEntries().forEach(entry -> registry.add(new BaseMachineDisplay(new BaseMachineRecipe(entry), CategoryIDs.MACERATOR)));
         RECIPES.extractor.getAllEntries().forEach(entry -> registry.add(new BaseMachineDisplay(new BaseMachineRecipe(entry), CategoryIDs.EXTRACTOR)));
         RECIPES.compressor.getAllEntries().forEach(entry -> registry.add(new BaseMachineDisplay(new BaseMachineRecipe(entry), CategoryIDs.COMPRESSOR)));
-        RECIPES.recycler.getAllEntries().forEach(entry -> registry.add(new RecyclerDisplay(new RecyclerRecipe(entry), CategoryIDs.RECYCLER)));
+        createRecyclerRecipes(RECIPES).forEach(entry -> registry.add(new RecyclerDisplay(new RecyclerRecipe(entry))));
         RECIPES.sawmill.getAllEntries().forEach(entry -> registry.add(new BaseMachineDisplay(new BaseMachineRecipe(entry), CategoryIDs.SAWMILL)));
         RECIPES.mixingFurnace.getAllEntries().forEach(entry -> registry.add(new DoubleInputMachineDisplay(new DoubleInputMachineRecipe(entry), CategoryIDs.ALLOY_SMELTER)));
         RECIPES.fluid_fuel.getFuels().forEach(fuelEntry -> registry.add(new FluidGeneratorsDisplay.FluidGeneratorDisplay(new FluidGeneratorRecipe(fuelEntry), false)));
@@ -152,7 +159,6 @@ public class IC2REIPlugin implements REIClientPlugin {
         RECIPES.refining.getAllRecipes().forEach(recipe -> registry.add(new RefineryDisplay(new RefineryRecipe(recipe))));
         RECIPES.enricher.getRecipes().forEach(recipe -> registry.add(new EnricherDisplay(recipe)));
         registry.add(new WoodGassifierDisplay(new WoodGassifierRecipe(WoodGassifierCategory.getLogList(), new ItemStack(Items.CHARCOAL), FluidStack.create(IC2Fluids.WOOD_GAS, 810))));
-        loadScrapRecipe(registry);
         List<IScrapBoxRegistry.IDrop> sortedScrapboxList = IC2.RECIPES.get(false).scrapBoxes.getAllDrops().stream().sorted(Comparator.comparing(IScrapBoxRegistry.IDrop::getChance).reversed()).toList();
         sortedScrapboxList.forEach(drop -> registry.add(new ScrapboxDisplay(new ScrapboxRecipe(drop))));
         registerCannerRecipe(registry, RECIPES);
@@ -242,16 +248,33 @@ public class IC2REIPlugin implements REIClientPlugin {
         Arrays.stream(stations).forEach(station -> r.addWorkstations(id, EntryStacks.of(station)));
     }
 
-    public static void loadScrapRecipe(DisplayRegistry r) {
-        List<ItemStack> SCRAP = new ArrayList<>();
-        ForgeRegistries.ITEMS.forEach(item -> {
-            if (item != Items.AIR) {
-                SCRAP.add(new ItemStack(item));
+    private static List<IMachineRecipeList.RecipeEntry> createRecyclerRecipes(GlobalRecipes recipe) {
+        List<IMachineRecipeList.RecipeEntry> result = CollectionUtils.createList();
+        List<ItemStack> scrapItems = CollectionUtils.createList();
+        List<ItemStack> scrapMetalItems = CollectionUtils.createList();
+        ObjectList<ItemStack> lists = ItemStackCache.INSTANCE.getCache();
+        int i = 0;
+
+        for(int m = lists.size(); i < m; ++i) {
+            IMachineRecipeList.RecipeEntry entry = recipe.recycler.getRecipe(lists.get(i), false);
+            if (entry != null && entry.getOutput() instanceof ScrapOutput) {
+                String path = entry.getLocation().getPath();
+                if (path.equalsIgnoreCase("scrap")) {
+                    scrapItems.add(lists.get(i));
+                } else if (path.equalsIgnoreCase("scrap_metal")) {
+                    scrapMetalItems.add(lists.get(i));
+                }
             }
-        });
-        if (!SCRAP.isEmpty()) {
-            r.add(new RecyclerDisplay(new RecyclerRecipe(SCRAP), CategoryIDs.RECYCLER, true));
         }
+
+        if (IC2.CONFIG.showDefaultRecyclerRecipe.get()) {
+            result.add(new IMachineRecipeList.RecipeEntry(new ResourceLocation("ic2", "scrap"), new ScrapOutput(new ItemStack(IC2Items.SCRAP), 4), new IInput[]{new IngredientInput(Ingredient.of((ItemStack[])scrapItems.toArray(new ItemStack[scrapItems.size()])), 1)}));
+        }
+
+        result.add(new IMachineRecipeList.RecipeEntry(new ResourceLocation("ic2", "scrap_metal"), new ScrapOutput(new ItemStack(IC2Items.SCRAP_METAL), 8), new IInput[]{new IngredientInput(Ingredient.of((ItemStack[])scrapMetalItems.toArray(new ItemStack[scrapMetalItems.size()])), 1)}));
+        result.add(ScrapOutput.createEntry(0));
+        result.addAll(recipe.recycler.getAllEntries());
+        return result;
     }
 
     public static void registerExistingStations(CategoryRegistry r) {

@@ -41,7 +41,9 @@ public class PotionBrewCategory implements DisplayCategory<PotionBrewDisplay>, I
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(IC2Blocks.BARREL);
+        ItemStack stack = new ItemStack(IC2Blocks.BARREL);
+        stack.getOrCreateTag().putInt("type", 10);
+        return EntryStacks.of(stack);
     }
 
     @Override

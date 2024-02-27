@@ -42,7 +42,9 @@ public class BeerBrewCategory implements DisplayCategory<BeerBrewDisplay>, IGuiH
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(IC2Blocks.BARREL);
+        ItemStack stack = new ItemStack(IC2Blocks.BARREL);
+        stack.getOrCreateTag().putInt("type", 1);
+        return EntryStacks.of(stack);
     }
 
     @Override

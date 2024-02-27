@@ -16,6 +16,7 @@ import me.shedaniel.rei.api.common.util.EntryIngredients;
 import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.item.ItemStack;
 import org.apache.commons.lang3.time.DurationFormatUtils;
 
 import java.time.Duration;
@@ -41,7 +42,9 @@ public class RumBrewCategory implements DisplayCategory<RumBrewDisplay>, IGuiHel
 
     @Override
     public Renderer getIcon() {
-        return EntryStacks.of(IC2Blocks.BARREL);
+        ItemStack stack = new ItemStack(IC2Blocks.BARREL);
+        stack.getOrCreateTag().putInt("type", 2);
+        return EntryStacks.of(stack);
     }
 
     @Override
