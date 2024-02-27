@@ -37,7 +37,6 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
             property 'forge.enabledGameTestNamespaces', 'examplemod'
-
             mods {
                 examplemod {
                     source sourceSets.main
@@ -47,13 +46,9 @@ minecraft {
 
         server {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             property 'forge.enabledGameTestNamespaces', 'examplemod'
-
             mods {
                 examplemod {
                     source sourceSets.main
@@ -63,13 +58,9 @@ minecraft {
 
         gameTestServer {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
             property 'forge.enabledGameTestNamespaces', 'examplemod'
-
             mods {
                 examplemod {
                     source sourceSets.main
@@ -79,14 +70,9 @@ minecraft {
 
         data {
             workingDirectory project.file('run')
-
             property 'forge.logging.markers', 'REGISTRIES'
-
             property 'forge.logging.console.level', 'debug'
-
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
             args '--mod', 'examplemod', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
-
             mods {
                 examplemod {
                     source sourceSets.main
@@ -118,7 +104,7 @@ repositories {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.19.2-43.3.0'
-    implementation fg.deobf("curse.maven:ic2-classic-242942:4879119")
+    implementation fg.deobf("curse.maven:ic2-classic-242942:5137503")
     implementation fg.deobf("curse.maven:advanced-solars-classic-314835:4856232")
     implementation fg.deobf("curse.maven:cofh-core-69162:4801049")
     
@@ -127,7 +113,7 @@ dependencies {
 
     implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:9.1.668")
 
-//    implementation fg.deobf("curse.maven:jei-238222:4712866")
+    implementation fg.deobf("curse.maven:jei-238222:4712866")
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:4644795")
 }
 
