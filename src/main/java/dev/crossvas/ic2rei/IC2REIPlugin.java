@@ -171,8 +171,6 @@ public class IC2REIPlugin implements REIClientPlugin {
         PotionBrewRecipe.getPotionRecipeList(RECIPES).forEach(recipe -> registry.add(new PotionBrewDisplay(recipe)));
         NuclearReactorScheme.getReactorSchemes().forEach(scheme -> registry.add(new NuclearReactorDisplay(scheme)));
 
-        // Idk how bad this is performance wise, but it works
-//        RecipeHandler.INSTANCE.init();
         registry.registerVisibilityPredicate(new RecipeHandler());
     }
 
