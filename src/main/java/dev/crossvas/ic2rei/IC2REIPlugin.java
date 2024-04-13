@@ -172,7 +172,7 @@ public class IC2REIPlugin implements REIClientPlugin {
         NuclearReactorScheme.getReactorSchemes().forEach(scheme -> registry.add(new NuclearReactorDisplay(scheme)));
 
         // Idk how bad this is performance wise, but it works
-        RecipeHandler.INSTANCE.init();
+//        RecipeHandler.INSTANCE.init();
         registry.registerVisibilityPredicate(new RecipeHandler());
     }
 
