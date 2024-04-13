@@ -24,30 +24,16 @@ public class RecipeHandler implements DisplayVisibilityPredicate {
 
     public static final RecipeHandler INSTANCE = new RecipeHandler();
 
-    public List<CraftingRecipe> HIDDEN_RECIPES;
-
-    static Map<CategoryIdentifier<?>, Set<Object>> hiddenRecipes;
+    public List<CraftingRecipe> HIDDEN_RECIPES = new ObjectArrayList<>();
+    static Map<CategoryIdentifier<?>, Set<Object>> MAPPED_RECIPES = new HashMap<>();
     public Map<ResourceLocation, CategoryIdentifier<?>> CATEGORY_ID_MAP = new HashMap<>();
 
     public RecipeHandler() {
         CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "crafting"), BuiltinPlugin.CRAFTING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "stonecutting"), BuiltinPlugin.STONE_CUTTING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "furnace"), BuiltinPlugin.SMELTING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "smoking"), BuiltinPlugin.SMOKING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "blasting"), BuiltinPlugin.BLASTING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "campfire"), BuiltinPlugin.CAMPFIRE);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "brewing"), BuiltinPlugin.BREWING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "anvil"), BuiltinPlugin.ANVIL);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "smithing"), BuiltinPlugin.SMITHING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "compostable"), BuiltinPlugin.COMPOSTING);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "fuel"), BuiltinPlugin.FUEL);
-        CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "information"), BuiltinPlugin.INFO);
     }
 
     public void init() {
         if (IC2.CONFIG.recipeHiding.get()) {
-            HIDDEN_RECIPES = new ObjectArrayList<>();
-            hiddenRecipes = new HashMap<>();
             List<CraftingRecipe> recipes = Minecraft.getInstance().player.connection.getRecipeManager().getAllRecipesFor(RecipeType.CRAFTING);
             for (CraftingRecipe recipe : recipes) {
                 if (recipe instanceof RecipeIC2Base ic2Recipe) {
@@ -58,9 +44,6 @@ public class RecipeHandler implements DisplayVisibilityPredicate {
             }
 
             hideRecipes(BuiltinPlugin.CRAFTING, HIDDEN_RECIPES);
-        } else {
-            hiddenRecipes = null;
-            HIDDEN_RECIPES = null;
         }
     }
 
@@ -68,7 +51,7 @@ public class RecipeHandler implements DisplayVisibilityPredicate {
     public EventResult handleDisplay(DisplayCategory<?> category, Display display) {
         if (IC2.CONFIG.recipeHiding.get()) {
             if (display.getCategoryIdentifier() == BuiltinPlugin.CRAFTING) {
-                Set<Object> hidden = hiddenRecipes.get(category.getCategoryIdentifier());
+                Set<Object> hidden = MAPPED_RECIPES.get(category.getCategoryIdentifier());
                 if (hidden != null && hidden.contains(MoreObjects.firstNonNull(getDisplay(display), display)))
                     return EventResult.interruptFalse();
             }
@@ -85,11 +68,7 @@ public class RecipeHandler implements DisplayVisibilityPredicate {
     }
 
     public <T extends Recipe<?>> void hideRecipes(CategoryIdentifier<?> id, Collection<T> recipes) {
-        (hiddenRecipes.computeIfAbsent(categoryId(id), identifier -> new HashSet<>())).addAll(recipes);
-    }
-
-    public <T extends Display> CategoryIdentifier<T> categoryId(CategoryIdentifier<?> id) {
-        return categoryId(id.getIdentifier());
+        (MAPPED_RECIPES.computeIfAbsent(categoryId(id.getIdentifier()), identifier -> new HashSet<>())).addAll(recipes);
     }
 
     public <T extends Display> CategoryIdentifier<T> categoryId(ResourceLocation id) {
