@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories;
 
 import com.google.common.collect.Lists;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.PlasmafierDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -59,7 +60,7 @@ public class PlasmafierCategory implements DisplayCategory<PlasmafierDisplay>, I
         Point auxInputPoint = point(maxX - offset - 2 * slotSize, maxY - lineHeight - (2 * slotSize) - 2 * offset - 2);
         Point outputPoint = point(maxX - offset - 2 * slotSize, maxY - lineHeight - slotSize - 2 * offset);
         // base
-        widgets.add(Widgets.createTexturedWidget(GuiHelper.ProgressType.ELECTROLYZER.texture, inputPoint.getX() + slotSize + 9, inputPoint.getY(), 75, 34, 32, 17));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), inputPoint.getX() + slotSize + 9, inputPoint.getY(), 0, 231, 32, 17));
         GuiHelper.addProgressBar(widgets, point(inputPoint.getX() + slotSize + 13, inputPoint.getY()), 3000, GuiHelper.ProgressType.ELECTROLYZER);
         // info
         if (shouldAddEnergyInfo()) {

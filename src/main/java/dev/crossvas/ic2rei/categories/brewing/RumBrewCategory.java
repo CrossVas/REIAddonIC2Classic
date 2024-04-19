@@ -1,5 +1,6 @@
 package dev.crossvas.ic2rei.categories.brewing;
 
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.brewing.RumBrewDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -25,7 +26,6 @@ import java.util.List;
 
 public class RumBrewCategory implements DisplayCategory<RumBrewDisplay>, IGuiHelper {
 
-    ResourceLocation TEXTURE = new ResourceLocation("ic2", "textures/gui_sprites/misc/rum_brew_jei.png");
     String TIME_FORMAT = "HH:mm:ss";
 
     public static final RumBrewCategory INSTANCE = new RumBrewCategory();
@@ -53,8 +53,8 @@ public class RumBrewCategory implements DisplayCategory<RumBrewDisplay>, IGuiHel
         GuiHelper.createRecipeBase(widgets, bounds);
         Point inputPoint = adjustedInputPoint(bounds);
         Point secondInputPoint = point(inputPoint.getX() + slotSize + 2 * innerOffset + 15 + 2, inputPoint.getY());
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, inputPoint.getX() + slotSize + innerOffset, inputPoint.getY(), 44, 34, 15, 15));
-        widgets.add(Widgets.createTexturedWidget(TEXTURE, secondInputPoint.getX() + slotSize, secondInputPoint.getY() - 1, 80, 33, 31, 18));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), inputPoint.getX() + slotSize + innerOffset, inputPoint.getY(), 215, 0, 15, 15));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), secondInputPoint.getX() + slotSize, secondInputPoint.getY() - 1, 215, 16, 31, 18));
         String time = DurationFormatUtils.formatDuration(Duration.ofSeconds((long)(display.getRecipe().getTime() / 20)).toMillis(), TIME_FORMAT);
         GuiHelper.addLabelLeft(widgets, point(bounds.getMinX() + offset, bounds.getMaxY() - offset - lineHeight), format("rei.cat.brewing.rum.time", time));
         GuiHelper.addInputSlot(widgets, inputPoint, EntryIngredients.of(display.getRecipe().getInput()));

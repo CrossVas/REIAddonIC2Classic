@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories.brewing;
 
 import dev.crossvas.ic2rei.IC2REI;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.brewing.PotionBrewDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -49,7 +50,7 @@ public class PotionBrewCategory implements DisplayCategory<PotionBrewDisplay>, I
     @Override
     public List<Widget> setupDisplay(PotionBrewDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
-        ResourceLocation texture = new ResourceLocation(IC2REI.ID, "textures/gui/misc/gui_brewing_potion.png");
+        ResourceLocation texture = IC2REIPlugin.getTexture("misc/gui_brewing_potion");
         ItemStack CLOCK = new ItemStack(Items.CLOCK, display.getRecipe().getDuration() + 1);
         StackUtil.addTooltip(CLOCK, Component.translatable("rei.cat.brewing.beer.clock"));
 

@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories;
 
 import com.google.common.collect.Lists;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.MassFabricatorDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -86,7 +87,7 @@ public class MassFabricatorCategory implements DisplayCategory<MassFabricatorDis
             addEUReaderErrorMessage(widgets, errorPoint, true, false);
         }
         // base
-        widgets.add(Widgets.createTexturedWidget(GuiHelper.ProgressType.RECYCLER.texture, centerX, centerY - 7, 176, 0, 14, 14));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), centerX, centerY - 7, 200, 0, 14, 14));
         // input
         Point inputPoint = point(centerX, maxY - slotSize - lineHeight - offset - innerOffset);
         GuiHelper.addInputSlot(widgets, inputPoint, EntryIngredients.of(display.getRecipe().getInput()));

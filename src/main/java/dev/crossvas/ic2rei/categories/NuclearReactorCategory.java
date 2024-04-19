@@ -18,7 +18,6 @@ import me.shedaniel.rei.api.common.util.EntryStacks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 
 import java.util.Iterator;
 import java.util.List;
@@ -26,8 +25,6 @@ import java.util.List;
 public class NuclearReactorCategory implements DisplayCategory<NuclearReactorDisplay>, IGuiHelper {
 
     public static final NuclearReactorCategory INSTANCE = new NuclearReactorCategory();
-
-    private static final ResourceLocation TEXTURE = new ResourceLocation("ic2", "textures/gui_sprites/misc/jei_reactor.png");
 
     @Override
     public CategoryIdentifier<? extends NuclearReactorDisplay> getCategoryIdentifier() {
@@ -68,7 +65,7 @@ public class NuclearReactorCategory implements DisplayCategory<NuclearReactorDis
         y = bounds.getMinY() + 108 + lineHeight;
         for(Iterator<Component> components = display.getScheme().text.iterator(); components.hasNext(); y += 10) {
             Component process = components.next();
-            GuiHelper.addLabelLeft(widgets, point(bounds.getMinX() + offset, y), process.copy().withStyle(ChatFormatting.BLACK));
+            GuiHelper.addLabelLeft(widgets, point(bounds.getMinX() + offset, y), process);
         }
 
         return widgets;
@@ -85,7 +82,6 @@ public class NuclearReactorCategory implements DisplayCategory<NuclearReactorDis
     }
 
     private void slot(List<Widget> list, int x, int y, EntryIngredient entry) {
-        list.add(Widgets.createTexturedWidget(TEXTURE, x, y, 165, 0, 18, 18));
-        list.add(Widgets.createSlot(point(x + 1, y + 1)).entries(entry).markInput().disableBackground());
+        list.add(Widgets.createSlot(point(x + 1, y + 1)).entries(entry).markInput());
     }
 }

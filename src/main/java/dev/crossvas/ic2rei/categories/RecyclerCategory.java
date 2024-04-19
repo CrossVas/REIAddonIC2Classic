@@ -52,7 +52,7 @@ public class RecyclerCategory implements DisplayCategory<RecyclerDisplay>, IGuiH
         EntryIngredient output = EntryIngredients.ofItemStacks(display.getRecipe().getOutputs());
         GuiHelper.addLargeOutputSlot(widgets, adjustedOutputPoint(bounds), output);
         float chance = display.getRecipe().getChance();
-        Component chanceLabel = Component.literal(display.getRecipe().getChance() + "%").withStyle(ChatFormatting.BLACK);
+        Component chanceLabel = Component.literal(display.getRecipe().getChance() + "%");
         Point chancePoint = point(bounds.getMaxX() - offset, bounds.getMaxY() - lineHeight - offset);
         if (chance > 0) {
             GuiHelper.addLabelRight(widgets, chancePoint, chanceLabel);

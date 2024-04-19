@@ -80,15 +80,15 @@ public interface IGuiHelper {
     }
 
     default MutableComponent format(String text) {
-        return Component.translatable(text).withStyle(ChatFormatting.BLACK);
+        return Component.translatable(text);
     }
 
     default MutableComponent format(String text, Object... pArgs) {
-        return Component.translatable(text, pArgs).withStyle(ChatFormatting.BLACK);
+        return Component.translatable(text, pArgs);
     }
 
     default MutableComponent literal(String text) {
-        return Component.literal(text).withStyle(ChatFormatting.BLACK);
+        return Component.literal(text);
     }
 
     default int getWidth() {

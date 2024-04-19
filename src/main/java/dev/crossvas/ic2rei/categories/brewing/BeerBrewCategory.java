@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories.brewing;
 
 import dev.crossvas.ic2rei.IC2REI;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.brewing.BeerBrewDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -9,6 +10,7 @@ import ic2.core.platform.registries.IC2Blocks;
 import ic2.core.utils.helpers.StackUtil;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import me.shedaniel.math.Rectangle;
+import me.shedaniel.rei.api.client.config.ConfigObject;
 import me.shedaniel.rei.api.client.gui.Renderer;
 import me.shedaniel.rei.api.client.gui.widgets.Widget;
 import me.shedaniel.rei.api.client.gui.widgets.Widgets;
@@ -50,7 +52,7 @@ public class BeerBrewCategory implements DisplayCategory<BeerBrewDisplay>, IGuiH
     @Override
     public List<Widget> setupDisplay(BeerBrewDisplay display, Rectangle bounds) {
         List<Widget> widgets = new ObjectArrayList<>();
-        ResourceLocation texture = new ResourceLocation(IC2REI.ID, "textures/gui/misc/gui_brewing_beer_alt.png");
+        ResourceLocation texture = IC2REIPlugin.getTexture("misc/gui_brewing_beer_alt");
         ItemStack CLOCK = new ItemStack(Items.CLOCK, display.getRecipe().getTime() + 1);
         StackUtil.addTooltip(CLOCK, Component.translatable("rei.cat.brewing.beer.clock"));
 

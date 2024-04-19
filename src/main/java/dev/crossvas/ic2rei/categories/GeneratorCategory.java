@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories;
 
 import com.google.common.collect.Lists;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.GeneratorDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -53,7 +54,7 @@ public class GeneratorCategory implements DisplayCategory<GeneratorDisplay>, IGu
         // input
         GuiHelper.addInputSlot(widgets, inputPoint, EntryIngredients.of(display.getRecipe().getInput()));
         widgets.add(Widgets.createBurningFire(point(inputPoint.getX() + 1, inputPoint.getY() - slotSize)).animationDurationTicks(display.getRecipe().getEnergy()));
-        widgets.add(Widgets.createTexturedWidget(GuiHelper.ProgressType.GENERATOR.texture, progressBack.getX(), progressBack.getY(), 90, 35, 32, 17));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), progressBack.getX(), progressBack.getY(), 0, 231, 32, 17));
         GuiHelper.addProgressBar(widgets, point(progressBar.getX(), progressBar.getY()), 3000, GuiHelper.ProgressType.GENERATOR);
         return widgets;
     }

@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories;
 
 import com.google.common.collect.Lists;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.EnricherDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -50,7 +51,7 @@ public class EnricherCategory implements DisplayCategory<EnricherDisplay>, IGuiH
         GuiHelper.addProgressBar(widgets, point(bounds.getMinX() + 2 * offset + slotSize, bounds.getMinY() + offset), 3000, GuiHelper.ProgressType.SMELTER);
         GuiHelper.addProgressBar(widgets, point(getProgressBarX(bounds), getProgressBarY(bounds) - slotSize / 2), 3000, GuiHelper.ProgressType.ENRICHER);
         Point fuelPoint = point(getCenterX(bounds) - slotSize + offset, bounds.getMinY() + offset);
-        widgets.add(Widgets.createTexturedWidget(GuiHelper.ProgressType.ENRICHER.texture, fuelPoint.getX(), fuelPoint.getY(), 90, 15, 6, 35));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), fuelPoint.getX(), fuelPoint.getY(), 0, 134, 6, 35));
         widgets.add(Widgets.createFilledRectangle(new Rectangle(point(fuelPoint.getX() + 1, fuelPoint.getY() + 1), new Dimension(4, 33)), display.getColor()));
         // input
         EntryIngredient input = EntryIngredients.ofItemStacks(display.getInputs());

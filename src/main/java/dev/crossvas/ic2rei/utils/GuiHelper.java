@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.utils;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import me.shedaniel.math.Point;
 import me.shedaniel.math.Rectangle;
 import me.shedaniel.rei.api.client.gui.widgets.Slot;
@@ -25,7 +26,7 @@ public class GuiHelper {
 
     private static Widget createProgressBar(int x, int y, double animationTime, ProgressType type) {
         return Widgets.createDrawableWidget((helper, matrices, mouseX, mouseY, delta) -> {
-            RenderSystem.setShaderTexture(0, type.texture);
+            RenderSystem.setShaderTexture(0, IC2REIPlugin.getTexture("gui"));
             helper.blit(matrices, x, y, type.x, type.y, type.width, type.height);
             int i = (int) ((System.currentTimeMillis() / animationTime) % 1.0 * type.width);
             if (i < 0) {
@@ -56,37 +57,37 @@ public class GuiHelper {
 
     public static void addTank(List<Widget> list, int x, int y, EntryIngredient entry) {
         // tank base
-        list.add(Widgets.createTexturedWidget(ProgressType.REFINERY.texture, x, y, ProgressType.REFINERY.x, ProgressType.REFINERY.y, ProgressType.REFINERY.width, ProgressType.REFINERY.height));
+        list.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), x, y, ProgressType.REFINERY.x, ProgressType.REFINERY.y, ProgressType.REFINERY.width, ProgressType.REFINERY.height));
         list.add(new EntryWidget(new Rectangle(x, y, ProgressType.REFINERY.width, ProgressType.REFINERY.height)).entries(entry).disableBackground().disableHighlight());
         // tank overlay
-        list.add(Widgets.createTexturedWidget(ProgressType.REFINERY.texture, x + 1, y + 1, 176, 31, 16, 58));
+        list.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), x + 1, y + 1, 19, 170, 16, 58));
     }
 
     public static void addLabel(List<Widget> widgetList, Point point, Component text) {
-        widgetList.add(Widgets.createLabel(point, text).shadow(false));
+        widgetList.add(Widgets.createLabel(point, text).color(-12566464, -4473925).noShadow());
     }
 
     public static void addLabelRight(List<Widget> widgetList, Point point, Component text) {
-        widgetList.add(Widgets.createLabel(point, text).shadow(false).rightAligned());
+        widgetList.add(Widgets.createLabel(point, text).color(-12566464, -4473925).noShadow().rightAligned());
     }
 
     public static void addLabelLeft(List<Widget> widgetList, Point point, Component text) {
-        widgetList.add(Widgets.createLabel(point, text).shadow(false).leftAligned());
+        widgetList.add(Widgets.createLabel(point, text).color(-12566464, -4473925).noShadow().leftAligned());
     }
 
     public enum ProgressType {
-        MACERATOR("machines/lv/gui_macerator", 79, 34, 176, 14, 24, 17),
-        EXTRACTOR("machines/lv/gui_extractor", 79, 34, 176, 14, 24, 17),
-        COMPRESSOR("machines/lv/gui_compressor", 79, 34, 176, 14, 24, 17),
-        SAWMILL("machines/lv/gui_sawmill", 79, 34, 176, 14, 24, 17),
-        RECYCLER("machines/lv/gui_recycler", 79, 34, 176, 14, 24, 17),
-        EARTH_EXTRACTOR("machines/lv/gui_rare_earth_extractor", 79, 34, 176, 14, 24, 17),
-        SMELTER("machines/lv/gui_electric_furnace", 79, 34, 176, 14, 24, 17),
-        ELECTROLYZER("machines/lv/gui_electrolyzer", 79, 34, 176, 14, 24, 17),
-        CANNER("machines/lv/gui_canner", 74, 36, 176, 15, 34, 13),
-        REFINERY("machines/mv/gui_refinery", 35, 17, 0, 0, 18, 60),
-        ENRICHER("machines/hv/gui_uranium_enricher", 97, 35, 176, 36, 52, 34),
-        GENERATOR("generators/gui_generator", 94, 35, 176, 14, 24, 17);
+        MACERATOR(25, 0, 25, 18, 24, 17),
+        EXTRACTOR(75, 0, 75, 18, 24, 17),
+        COMPRESSOR(50, 0, 50, 18, 24, 17),
+        SAWMILL(150, 0, 150, 18, 24, 17),
+        RECYCLER(125, 0, 125, 18, 24, 17),
+        EARTH_EXTRACTOR(100, 0, 100, 18, 24, 17),
+        SMELTER(0, 0, 0, 18, 24, 17),
+        ELECTROLYZER(175, 0, 175, 18, 24, 17),
+        CANNER(0, 36, 0, 50, 34, 13),
+        REFINERY(0, 170, 0, 0, 18, 60),
+        ENRICHER(0, 64, 0, 99, 52, 34),
+        GENERATOR(175, 0, 175, 18, 24, 17);
 
         public final int x;
         public final int y;
@@ -94,16 +95,14 @@ public class GuiHelper {
         public final int yActive;
         public final int width;
         public final int height;
-        public final ResourceLocation texture;
 
-        ProgressType(String texture, int x, int y, int xActive, int yActive, int width, int height) {
+        ProgressType(int x, int y, int xActive, int yActive, int width, int height) {
             this.x = x;
             this.y = y;
             this.xActive = xActive;
             this.yActive = yActive;
             this.width = width;
             this.height = height;
-            this.texture = new ResourceLocation("ic2", "textures/gui_sprites/blocks/" + texture + ".png");
 
         }
     }

@@ -1,6 +1,7 @@
 package dev.crossvas.ic2rei.categories;
 
 import com.google.common.collect.Lists;
+import dev.crossvas.ic2rei.IC2REIPlugin;
 import dev.crossvas.ic2rei.displays.ElectrolyzerDisplay;
 import dev.crossvas.ic2rei.utils.CategoryIDs;
 import dev.crossvas.ic2rei.utils.GuiHelper;
@@ -41,7 +42,7 @@ public class ElectrolyzerCategory implements DisplayCategory<ElectrolyzerDisplay
     public List<Widget> setupDisplay(ElectrolyzerDisplay display, Rectangle bounds) {
         List<Widget> widgets = Lists.newArrayList();
         GuiHelper.createRecipeBase(widgets, bounds);
-        widgets.add(Widgets.createTexturedWidget(GuiHelper.ProgressType.ELECTROLYZER.texture, adjustedInputPoint(bounds).getX() + 2 * slotSize - innerOffset - 1, getCenterY(bounds) - 1, 75, 34, 32, 17));
+        widgets.add(Widgets.createTexturedWidget(IC2REIPlugin.getTexture("gui"), adjustedInputPoint(bounds).getX() + 2 * slotSize - innerOffset - 1, getCenterY(bounds) - 1, 0, 231, 32, 17));
         GuiHelper.addProgressBar(widgets, point(getProgressBarX(bounds), getProgressBarY(bounds) - 1), 3000, GuiHelper.ProgressType.ELECTROLYZER);
         // info
         GuiHelper.addLabel(widgets, point(bounds.getCenterX(), bounds.getMinY() + offset), format(display.getRecipeModeString()));
