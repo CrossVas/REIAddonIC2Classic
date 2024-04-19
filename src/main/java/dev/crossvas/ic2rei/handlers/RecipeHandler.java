@@ -30,6 +30,9 @@ public class RecipeHandler implements DisplayVisibilityPredicate {
 
     public RecipeHandler() {
         CATEGORY_ID_MAP.put(new ResourceLocation("minecraft", "crafting"), BuiltinPlugin.CRAFTING);
+    }
+
+    public void init() {
         HIDDEN_RECIPES = new ObjectArrayList<>();
         MAPPED_RECIPES = new HashMap<>();
         if (IC2.CONFIG.recipeHiding.get()) {
@@ -61,7 +64,7 @@ public class RecipeHandler implements DisplayVisibilityPredicate {
     }
 
     @SuppressWarnings({"unchecked", "rawtypes"})
-    public static <A extends Display> Object getDisplay(A display) {
+    public <A extends Display> Object getDisplay(A display) {
         Object origin = DisplayRegistry.getInstance().getDisplayOrigin(display);
         if (origin instanceof DefaultCraftingDisplay)
             origin = ((DefaultCraftingDisplay)origin).getOptionalRecipe().orElse(origin);

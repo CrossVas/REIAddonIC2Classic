@@ -36,6 +36,7 @@ import ic2.core.platform.registries.IC2Fluids;
 import ic2.core.platform.registries.IC2Items;
 import ic2.core.utils.collection.CollectionUtils;
 import it.unimi.dsi.fastutil.objects.ObjectList;
+import me.shedaniel.rei.api.client.config.ConfigObject;
 import me.shedaniel.rei.api.client.plugins.REIClientPlugin;
 import me.shedaniel.rei.api.client.registry.category.CategoryRegistry;
 import me.shedaniel.rei.api.client.registry.display.DisplayCategory;
@@ -67,6 +68,14 @@ import java.util.List;
 
 @REIPluginClient
 public class IC2REIPlugin implements REIClientPlugin {
+
+    /**
+     * @param path path to the texture starting from <b>gui</b> folder, the dark theme is handled here, so no file extension needed
+     */
+    public static ResourceLocation getTexture(String path) {
+        boolean isDarkTheme = ConfigObject.getInstance().isUsingDarkTheme();
+        return new ResourceLocation(IC2REI.ID, "textures/gui/" + path + (isDarkTheme ? "_dark" : "") + ".png");
+    }
 
     @Override
     public void registerCategories(CategoryRegistry registry) {
@@ -171,6 +180,7 @@ public class IC2REIPlugin implements REIClientPlugin {
         PotionBrewRecipe.getPotionRecipeList(RECIPES).forEach(recipe -> registry.add(new PotionBrewDisplay(recipe)));
         NuclearReactorScheme.getReactorSchemes().forEach(scheme -> registry.add(new NuclearReactorDisplay(scheme)));
 
+        RecipeHandler.INSTANCE.init();
         registry.registerVisibilityPredicate(new RecipeHandler());
     }
 
