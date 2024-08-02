@@ -111,7 +111,7 @@ dependencies {
     implementation fg.deobf("me.shedaniel.cloth:cloth-config-forge:8.3.103")
     implementation fg.deobf("dev.architectury:architectury-forge:6.5.85")
 
-    implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:9.1.668")
+    implementation fg.deobf("me.shedaniel:RoughlyEnoughItems-forge:9.2.738")
 
     implementation fg.deobf("curse.maven:jei-238222:4712866")
     runtimeOnly fg.deobf("curse.maven:mekanism-268560:4644795")
