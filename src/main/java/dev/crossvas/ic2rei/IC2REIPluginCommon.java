@@ -20,6 +20,10 @@ public class IC2REIPluginCommon implements REIServerPlugin {
                 IC2Items.QUANTUM_SUIT_CHESTPLATE,
                 IC2Items.QUANTUM_SUIT_LEGGINGS,
                 IC2Items.QUANTUM_SUIT_BOOTS);
+        registry.register(tag("charge"), IC2Items.QUANTUM_SUIT_HELMET,
+                IC2Items.QUANTUM_SUIT_CHESTPLATE,
+                IC2Items.QUANTUM_SUIT_LEGGINGS,
+                IC2Items.QUANTUM_SUIT_BOOTS);
     }
 
     public static EntryComparator<ItemStack> subTag(String tag, String subTag) {
@@ -27,6 +31,15 @@ public class IC2REIPluginCommon implements REIServerPlugin {
         return (comparisonContext, stack) -> {
             CompoundTag stackTag = stack.getOrCreateTag().getCompound(tag);
             return !stackTag.contains(subTag) ? 0 : hasher.hash(comparisonContext, stackTag);
+        };
+    }
+
+    public static EntryComparator<ItemStack> tag(String tag) {
+        EntryComparator<Tag> hasher = Internals.getNbtHasher(new String[]{tag});
+        return (comparisonContext, stack) -> {
+            CompoundTag stackTag = stack.getOrCreateTag();
+            Tag ignoredTag = stackTag.get(tag);
+            return ignoredTag == null ? 0 : hasher.hash(comparisonContext, stackTag);
         };
     }
 }

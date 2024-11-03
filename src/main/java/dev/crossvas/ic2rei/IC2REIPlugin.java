@@ -233,7 +233,6 @@ public class IC2REIPlugin implements REIClientPlugin {
         });
     }
 
-
     @SuppressWarnings({"rawtypes", "unchecked"})
     public static void addCat(CategoryRegistry r, CategoryIdentifier id, DisplayCategory displayCat, Block... stations) {
         r.add(displayCat);
